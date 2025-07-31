@@ -184,10 +184,10 @@ function initializeHiddenMessages() {
         const messages = [
             'Las fotos no capturan toda la felicidad que siento contigo 😊',
             'Cada imagen cuenta una historia de amor única 📸',
-            'Eres la razón por la que sonrío todos los días ☀️',
+            'Me siento muy feliz de levantarme y saber que estás conmigo ☀️',
             'Nuestros recuerdos son mi tesoro más preciado 💎',
             'En cada foto veo lo perfectos que somos juntos 💑',
-            'Quiero llenar mil álbumes más con nuestras aventuras 📚'
+            'Quiero llenar mil álbumes más con nuestras aventuras y viajes 📚'
         ];
         
         item.addEventListener('dblclick', (e) => {
@@ -233,11 +233,11 @@ function showHiddenMessage(title, message, element) {
 // ===== MENSAJES SECRETOS POR TECLADO =====
 let keySequence = '';
 const secretCodes = {
-    'amor': '¡Has encontrado el código del amor! 💕 Eres la persona más especial en mi vida y cada día me enamoro más de ti.',
+    'amor': 'Constuir un amor fuerte y sincero es un viaje que vale la pena. 💕',
     'beso': '💋 Un beso virtual para ti, mi amor. Que este mensaje te llegue con todo el cariño que siento por ti.',
     'forever': '♾️ Para siempre y un día más. Esa es la promesa que te hago hoy y todos los días de mi vida.',
     'corazon': '❤️ Mi corazón te pertenece completamente. Cada latido lleva tu nombre grabado.',
-    'estrella': '⭐ Eres mi estrella guía, la luz que ilumina mis días más oscuros y la razón de mi felicidad.',
+    'viaje': 'Amamos viajar juntos y descubrir nuevos lugares. Cada aventura contigo es inolvidable. ✈️',
     'luna': '🌙 Como la luna y las estrellas, nuestro amor brillará por toda la eternidad.',
     'sol': '☀️ Eres mi sol, traes luz y calor a cada rincón de mi mundo.',
     'cielo': '☁️ Contigo he tocado el cielo y he descubierto que el paraíso existe.',
