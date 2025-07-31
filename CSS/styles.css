@@ -91,6 +91,172 @@ body {
     }
 }
 
+/* ===== CONTROLES DE MÚSICA ===== */
+.music-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.music-controls:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.music-btn {
+    background: var(--heart-gradient);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.music-btn.playing {
+    animation: musicPulse 2s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.music-info {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ===== MENSAJES OCULTOS ===== */
+.hidden-messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.hidden-message {
+    position: fixed;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 15px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.5s ease;
+    max-width: 300px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hidden-message.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hidden-message::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--primary-color);
+}
+
+.message-text {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* ===== MENSAJES SECRETOS POR TECLADO ===== */
+.keyboard-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.keyboard-content {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    margin: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    animation: slideInUp 0.7s ease-out;
+}
+
+.keyboard-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.keyboard-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.keyboard-content button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.keyboard-content button:hover {
+    background: white;
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
+
 /* ===== HERO SECTION ===== */
 .hero-section {
     display: flex;
@@ -387,6 +553,138 @@ body {
     flex-direction: column;
     align-items: center;
     background: rgba(0, 0, 0, 0.2);
+}
+
+/* ===== SECCIÓN DE VIDEOS ===== */
+.videos-section {
+    padding: 100px 0;
+    background: rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 3;
+}
+
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.video-gallery video {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    max-height: 400px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    object-fit: cover;
+    border: 3px solid transparent;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) padding-box,
+                linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+}
+
+.video-gallery video:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 0 25px 50px rgba(255, 105, 180, 0.3);
+    border-color: var(--primary-color);
+}
+
+.video-gallery video:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.3);
+}
+
+/* Estilos para controles de video personalizados */
+.video-gallery video::-webkit-media-controls-panel {
+    background: linear-gradient(135deg, rgba(255, 105, 180, 0.9), rgba(220, 20, 60, 0.9));
+    border-radius: 0 0 17px 17px;
+}
+
+.video-gallery video::-webkit-media-controls-play-button {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.video-gallery video::-webkit-media-controls-volume-slider {
+    background: var(--heart-gradient);
+}
+
+.video-gallery video::-webkit-media-controls-timeline {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.video-gallery video::-webkit-media-controls-current-time-display,
+.video-gallery video::-webkit-media-controls-time-remaining-display {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor de video con overlay de información */
+.video-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 3px;
+}
+
+.video-container video {
+    border-radius: 17px;
+    border: none;
+    background: black;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.video-container:hover .video-overlay {
+    opacity: 1;
+}
+
+.video-play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 105, 180, 0.9);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-container:hover .video-play-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-play-overlay:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(255, 105, 180, 1);
 }    
 /* ===== MODAL ===== */
 .modal {
@@ -542,6 +840,76 @@ body {
     .section-title {
         font-size: 2rem;
     }
+    
+    /* Ajustes para música en móvil */
+    .music-controls {
+        top: 10px;
+        right: 10px;
+        padding: 8px 15px;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .music-info {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    
+    .music-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    /* Mensajes ocultos en móvil */
+    .hidden-message {
+        max-width: 250px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .keyboard-content {
+        padding: 2rem 1.5rem;
+        margin: 10px;
+    }
+    
+    .keyboard-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .keyboard-content p {
+        font-size: 1rem;
+    }
+    
+    /* Videos responsive */
+    .videos-section {
+        padding: 60px 0;
+    }
+    
+    .video-gallery {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .video-container {
+        padding: 2px;
+    }
+    
+    .video-gallery video {
+        min-height: 250px;
+        max-height: 300px;
+    }
+    
+    .video-play-overlay {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .video-overlay {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -555,5 +923,64 @@ body {
     
     .timeline-content {
         padding: 20px;
+    }
+    
+    /* Controles de música más compactos */
+    .music-controls {
+        padding: 5px 10px;
+    }
+    
+    .music-info {
+        display: none; /* Ocultar texto en pantallas muy pequeñas */
+    }
+    
+    .music-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    /* Mensajes más pequeños */
+    .hidden-message {
+        max-width: 200px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .keyboard-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    /* Videos en pantallas muy pequeñas */
+    .videos-section {
+        padding: 40px 0;
+    }
+    
+    .video-gallery {
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .video-gallery video {
+        min-height: 200px;
+        max-height: 250px;
+        border-radius: 15px;
+    }
+    
+    .video-container {
+        border-radius: 18px;
+    }
+    
+    .video-play-overlay {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .video-overlay {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        top: 10px;
+        left: 10px;
     }
 }

@@ -17,6 +17,32 @@
     <!-- Corazones flotantes -->
     <div id="floating-hearts"></div>
     
+    <!-- Control de música -->
+    <div id="music-controls" class="music-controls">
+        <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
+            <i class="fas fa-music"></i>
+        </button>
+        <div class="music-info">
+            <span id="music-status">Haz clic para escuchar nuestra canción ♪</span>
+        </div>
+    </div>
+    
+    <!-- Audio element -->
+    <audio id="background-music" loop>
+        <source src="assets/audio/love-song.mp3" type="audio/mpeg">
+        <source src="assets/audio/love-song.ogg" type="audio/ogg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+       
+    <!-- Mensajes secretos por teclado -->
+    <div id="secret-keyboard-message" class="keyboard-message">
+        <div class="keyboard-content">
+            <h3>🎉 ¡Mensaje Secreto Desbloqueado! 🎉</h3>
+            <p id="keyboard-message-text"></p>
+            <button onclick="closeKeyboardMessage()">❤️ Cerrar</button>
+        </div>
+    </div>
+    
     <!-- Header -->
     <header class="hero-section">
         <div class="hero-content">
@@ -24,12 +50,41 @@
             <p class="subtitle">Nuestra historia de amor continúa...</p>
         </div>
     </header>
+    <!-- Videos momentos especiales -->
+    <section id="videos" class="videos-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Momentos en Video</h2>
+            <div class="video-gallery">
+                <div class="video-container">
+                    <video loop muted playsinline preload="metadata" onclick="toggleVideoPlay(this)">
+                        <source src="assets/img/moment1.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <div class="video-overlay">Nuestro primer viaje 🏍️</div>
+                    <div class="video-play-overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                
+                <div class="video-container">
+                    <video loop muted playsinline preload="metadata" onclick="toggleVideoPlay(this)">
+                        <source src="assets/img/moment2.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <div class="video-overlay">Nuestra primera salida a bailar 💃</div>
+                    <div class="video-play-overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Mensaje secreto -->
     <div id="secretMessage" class="secret-message">
         <div class="message-content">
             <h2>💕 Para ti, mi amor 💕</h2>
-            <p>Te amo más de lo que las palabras pueden expresar. Cada día a tu lado es una nueva aventura, y quiero vivir todas las que están por venir contigo. Eres mi presente más hermoso y mi futuro más deseado.</p>
+            <p>¡Te amo un montón mi vida hermosa!, no sabes la gratitud que siento de tenerte a mi lado, y de estar compartiendo la vida junto a ti, este será el primero de muchos aniversarios juntos 🥰</p>
             <div class="heart-animation">
                 <i class="fas fa-heart"></i>
                 <i class="fas fa-heart"></i>
@@ -112,7 +167,7 @@
                 </div>
                 
                 <div class="gallery-item" onclick="openModal('assets/img/photo5.jpg')">
-                    <img src="assets/img/photo5.jpg" alt="Momento especial 5" onerror="this.src='https://via.placeholder.com/300x300/ff69b4/white?text=Foto+5'">
+                    <img src="assets/img/photo5.png" alt="Momento especial 5" onerror="this.src='https://via.placeholder.com/300x300/ff69b4/white?text=Foto+5'">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>

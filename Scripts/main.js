@@ -3,7 +3,302 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeParticles();
     initializeFloatingHearts();
     initializeScrollAnimations();
+    initializeHiddenMessages();
+    initializeKeyboardSecrets();
+    initializeMusicControls();
+    initializeVideoControls();
 });
+
+// ===== CONTROL DE VIDEOS =====
+function initializeVideoControls() {
+    const videos = document.querySelectorAll('.video-container video');
+    
+    videos.forEach((video, index) => {
+        // Configurar video para autoplay silencioso
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        
+        // Agregar eventos para controlar reproducción
+        video.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleVideoPlay(this);
+        });
+        
+        // Reproducir automáticamente cuando esté visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play().catch(e => console.log('Autoplay prevented'));
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(video);
+        
+        // Agregar efectos de hover
+        const container = video.closest('.video-container');
+        const playOverlay = container.querySelector('.video-play-overlay');
+        
+        video.addEventListener('mouseenter', () => {
+            if (video.paused) {
+                playOverlay.style.opacity = '1';
+            }
+        });
+        
+        video.addEventListener('mouseleave', () => {
+            playOverlay.style.opacity = '0';
+        });
+        
+        // Cambiar ícono según estado de reproducción
+        video.addEventListener('play', () => {
+            playOverlay.innerHTML = '<i class="fas fa-pause"></i>';
+            container.classList.add('playing');
+        });
+        
+        video.addEventListener('pause', () => {
+            playOverlay.innerHTML = '<i class="fas fa-play"></i>';
+            container.classList.remove('playing');
+        });
+    });
+}
+
+function toggleVideoPlay(video) {
+    const container = video.closest('.video-container');
+    const playOverlay = container.querySelector('.video-play-overlay');
+    
+    if (video.paused) {
+        // Pausar otros videos que puedan estar reproduciéndose
+        document.querySelectorAll('.video-container video').forEach(v => {
+            if (v !== video && !v.paused) {
+                v.pause();
+            }
+        });
+        
+        video.play().then(() => {
+            playOverlay.innerHTML = '<i class="fas fa-pause"></i>';
+            
+            // Reducir volumen de música de fondo si está sonando
+            if (isPlaying && backgroundMusic) {
+                backgroundMusic.volume = 0.1;
+            }
+        }).catch(e => {
+            console.log('Error reproduciendo video:', e);
+        });
+    } else {
+        video.pause();
+        playOverlay.innerHTML = '<i class="fas fa-play"></i>';
+        
+        // Restaurar volumen de música de fondo
+        if (isPlaying && backgroundMusic) {
+            backgroundMusic.volume = 0.3;
+        }
+    }
+}
+
+// ===== CONTROL DE MÚSICA =====
+let isPlaying = false;
+let backgroundMusic = null;
+
+function initializeMusicControls() {
+    backgroundMusic = document.getElementById('background-music');
+    const musicToggle = document.getElementById('music-toggle');
+    const musicStatus = document.getElementById('music-status');
+    
+    // Configurar volumen inicial
+    if (backgroundMusic) {
+        backgroundMusic.volume = 0.3;
+        
+        // Eventos del reproductor
+        backgroundMusic.addEventListener('loadstart', () => {
+            musicStatus.textContent = 'Cargando canción...';
+        });
+        
+        backgroundMusic.addEventListener('canplay', () => {
+            musicStatus.textContent = 'Haz clic para escuchar nuestra canción ♪';
+        });
+        
+        backgroundMusic.addEventListener('error', () => {
+            musicStatus.textContent = 'Agrega tu canción favorita en assets/audio/love-song.mp3';
+        });
+    }
+}
+
+function toggleMusic() {
+    const musicToggle = document.getElementById('music-toggle');
+    const musicStatus = document.getElementById('music-status');
+    
+    if (!backgroundMusic) return;
+    
+    if (isPlaying) {
+        backgroundMusic.pause();
+        musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+        musicToggle.classList.remove('playing');
+        musicStatus.textContent = 'Música pausada - Haz clic para continuar';
+        isPlaying = false;
+    } else {
+        // Intentar reproducir música
+        backgroundMusic.play().then(() => {
+            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            musicToggle.classList.add('playing');
+            musicStatus.textContent = '♪ Sonando nuestra canción ♪';
+            isPlaying = true;
+        }).catch(error => {
+            console.log('Error al reproducir música:', error);
+            musicStatus.textContent = 'Haz clic para permitir reproducción';
+        });
+    }
+}
+
+// ===== MENSAJES OCULTOS =====
+function initializeHiddenMessages() {
+    // Mensajes que aparecen al hacer clic en el título
+    const mainTitle = document.querySelector('.main-title');
+    if (mainTitle) {
+        mainTitle.addEventListener('click', () => {
+            showHiddenMessage('¡Sorpresa! 💕', '¡Cada vez que veo tu sonrisa, mi corazón late más fuerte! 💖', mainTitle);
+        });
+        mainTitle.style.cursor = 'pointer';
+    }
+    
+    // Mensajes que aparecen al hacer hover en items del timeline
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        const messages = [
+            'Cada momento contigo es un tesoro que guardo en mi corazón ✨',
+            'Quiero crear millones de recuerdos más contigo 💕',
+            'Eres mi compañero de aventuras favorito 🌟',
+            'Cada día a tu lado es mejor que el anterior ❤️'
+        ];
+        
+        item.addEventListener('mouseenter', () => {
+            showHiddenMessage('Mensaje secreto 💖', messages[index] || messages[0], item);
+        });
+    });
+    
+    // Mensajes que aparecen al hacer doble clic en fotos
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach((item, index) => {
+        const messages = [
+            'Las fotos no capturan toda la felicidad que siento contigo 😊',
+            'Cada imagen cuenta una historia de amor única 📸',
+            'Eres la razón por la que sonrío todos los días ☀️',
+            'Nuestros recuerdos son mi tesoro más preciado 💎',
+            'En cada foto veo lo perfectos que somos juntos 💑',
+            'Quiero llenar mil álbumes más con nuestras aventuras 📚'
+        ];
+        
+        item.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            showHiddenMessage('¡Sorpresa! 🎉', messages[index] || messages[0], item);
+        });
+    });
+}
+
+function showHiddenMessage(title, message, element) {
+    // Crear mensaje temporal
+    const hiddenMessage = document.createElement('div');
+    hiddenMessage.className = 'hidden-message';
+    hiddenMessage.innerHTML = `
+        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem;">${title}</h4>
+        <p class="message-text">${message}</p>
+    `;
+    
+    // Posicionar cerca del elemento
+    const rect = element.getBoundingClientRect();
+    hiddenMessage.style.left = Math.min(rect.left, window.innerWidth - 320) + 'px';
+    hiddenMessage.style.top = (rect.top - 100) + 'px';
+    
+    document.body.appendChild(hiddenMessage);
+    
+    // Mostrar mensaje
+    setTimeout(() => {
+        hiddenMessage.classList.add('show');
+    }, 100);
+    
+    // Ocultar después de 4 segundos
+    setTimeout(() => {
+        hiddenMessage.classList.remove('show');
+        setTimeout(() => {
+            if (hiddenMessage.parentNode) {
+                hiddenMessage.parentNode.removeChild(hiddenMessage);
+            }
+        }, 500);
+    }, 4000);
+}
+
+// ===== MENSAJES SECRETOS POR TECLADO =====
+let keySequence = '';
+const secretCodes = {
+    'amor': '¡Has encontrado el código del amor! 💕 Eres la persona más especial en mi vida y cada día me enamoro más de ti.',
+    'beso': '💋 Un beso virtual para ti, mi amor. Que este mensaje te llegue con todo el cariño que siento por ti.',
+    'forever': '♾️ Para siempre y un día más. Esa es la promesa que te hago hoy y todos los días de mi vida.',
+    'corazon': '❤️ Mi corazón te pertenece completamente. Cada latido lleva tu nombre grabado.',
+    'estrella': '⭐ Eres mi estrella guía, la luz que ilumina mis días más oscuros y la razón de mi felicidad.',
+    'luna': '🌙 Como la luna y las estrellas, nuestro amor brillará por toda la eternidad.',
+    'sol': '☀️ Eres mi sol, traes luz y calor a cada rincón de mi mundo.',
+    'cielo': '☁️ Contigo he tocado el cielo y he descubierto que el paraíso existe.',
+    'angel': '👼 Eres mi ángel guardián, mi protector y mi mayor bendición.',
+    'bombon': 'Quiero crear millones de recuerdos más contigo ✨'
+};
+
+function initializeKeyboardSecrets() {
+    document.addEventListener('keydown', function(e) {
+        // Ignorar si hay un modal abierto
+        if (document.getElementById('secretMessage').style.display === 'flex' ||
+            document.getElementById('secret-keyboard-message').style.display === 'flex') {
+            return;
+        }
+        
+        keySequence += e.key.toLowerCase();
+        
+        // Mantener solo los últimos 10 caracteres
+        if (keySequence.length > 10) {
+            keySequence = keySequence.slice(-10);
+        }
+        
+        // Verificar códigos secretos
+        for (const [code, message] of Object.entries(secretCodes)) {
+            if (keySequence.includes(code)) {
+                showKeyboardMessage(message);
+                keySequence = '';
+                break;
+            }
+        }
+        
+        // Limpiar secuencia después de 3 segundos sin teclear
+        setTimeout(() => {
+            keySequence = '';
+        }, 3000);
+    });
+}
+
+function showKeyboardMessage(message) {
+    const messageEl = document.getElementById('secret-keyboard-message');
+    const textEl = document.getElementById('keyboard-message-text');
+    
+    textEl.textContent = message;
+    messageEl.style.display = 'flex';
+    
+    // Crear explosión de corazones
+    createHeartBurst();
+    
+    // Cambiar música si está sonando
+    if (isPlaying && backgroundMusic) {
+        backgroundMusic.volume = 0.1;
+        setTimeout(() => {
+            if (backgroundMusic) backgroundMusic.volume = 0.3;
+        }, 3000);
+    }
+}
+
+function closeKeyboardMessage() {
+    const messageEl = document.getElementById('secret-keyboard-message');
+    messageEl.style.display = 'none';
+}
 
 // ===== FUNCIÓN PARA MOSTRAR MENSAJE SECRETO =====
 function showMessage() {
