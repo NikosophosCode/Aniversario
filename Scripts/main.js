@@ -164,19 +164,19 @@ function initializeHiddenMessages() {
     }
     
     // Mensajes que aparecen al hacer hover en items del timeline
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    timelineItems.forEach((item, index) => {
-        const messages = [
-            'Cada momento contigo es un tesoro que guardo en mi corazón ✨',
-            'Quiero crear millones de recuerdos más contigo 💕',
-            'Eres mi compañero de aventuras favorito 🌟',
-            'Cada día a tu lado es mejor que el anterior ❤️'
-        ];
+    // const timelineItems = document.querySelectorAll('.timeline-item');
+    // timelineItems.forEach((item, index) => {
+    //     const messages = [
+    //         'Cada momento contigo es un tesoro que guardo en mi corazón ✨',
+    //         'Quiero crear millones de recuerdos más contigo 💕',
+    //         'Eres mi compañero de aventuras favorito 🌟',
+    //         'Cada día a tu lado es mejor que el anterior ❤️'
+    //     ];
         
-        item.addEventListener('mouseenter', () => {
-            showHiddenMessage('Mensaje secreto 💖', messages[index] || messages[0], item);
-        });
-    });
+    //     item.addEventListener('mouseenter', () => {
+    //         showHiddenMessage('Mensaje secreto 💖', messages[index] || messages[0], item);
+    //     });
+    // });
     
     // Mensajes que aparecen al hacer doble clic en fotos
     const galleryItems = document.querySelectorAll('.gallery-item');
