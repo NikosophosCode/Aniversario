@@ -1,21 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Historia ❤️</title>
+    <title>Nuestra Historia de Amor ❤️</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>¡Feliz Aniversario!</h1>  
-  <p>Haz clic en el corazón ❤️</p>  
-  <div id="heart" onclick="showMessage()">❤️</div>  
-  <div id="secretMessage">  
-    <p>Te amo más de lo que JavaScript ama los callbacks. 💻❤️</p>  
-  </div>  
-  <script>
-    function showMessage() {
-      document.getElementById("secretMessage").style.display = "block";
-    }
-  </script>
+    <!-- Contenedor de partículas -->
+    <div id="particles-container"></div>
+    
+    <!-- Corazones flotantes -->
+    <div id="floating-hearts"></div>
+    
+    <!-- Header -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 class="main-title">¡Feliz Aniversario Mi Amor!</h1>
+            <p class="subtitle">Nuestra historia de amor continúa...</p>
+        </div>
+    </header>
+
+    <!-- Mensaje secreto -->
+    <div id="secretMessage" class="secret-message">
+        <div class="message-content">
+            <h2>💕 Para ti, mi amor 💕</h2>
+            <p>Te amo más de lo que las palabras pueden expresar. Cada día a tu lado es una nueva aventura, y quiero vivir todas las que están por venir contigo. Eres mi presente más hermoso y mi futuro más deseado.</p>
+            <div class="heart-animation">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline de la relación -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia de Amor</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">❤️ Primer Encuentro</div>
+                        <h3>El día que cambió todo</h3>
+                        <p>Cuando nuestras miradas se cruzaron por primera vez, supe que algo mágico estaba por comenzar.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">💕 Primera Cita</div>
+                        <h3>Nervios y mariposas</h3>
+                        <p>Esa primera cita donde los nervios se convirtieron en risas y las risas en el inicio de nuestra historia.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">🌟 Oficial</div>
+                        <h3>Somos novios</h3>
+                        <p>El momento en que decidimos que queríamos escribir juntos el resto de nuestra historia.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">🎉 Hoy</div>
+                        <h3>Nuestro aniversario</h3>
+                        <p>Celebrando todo lo vivido y emocionados por todo lo que está por venir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de fotos -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Momentos Especiales</h2>
+            <div class="photo-gallery">
+                <div class="gallery-item" onclick="openModal('assets/img/photo1.jpg')">
+                    <img src="assets/img/photo1.jpg" alt="Momento especial 1" onerror="this.src='https://via.placeholder.com/300x300/ff69b4/white?text=Foto+1'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('assets/img/photo2.jpg')">
+                    <img src="assets/img/photo2.jpg" alt="Momento especial 2" onerror="this.src='https://via.placeholder.com/300x300/ff1493/white?text=Foto+2'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('assets/img/photo3.jpg')">
+                    <img src="assets/img/photo3.jpg" alt="Momento especial 3" onerror="this.src='https://via.placeholder.com/300x300/dc143c/white?text=Foto+3'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('assets/img/photo4.jpg')">
+                    <img src="assets/img/photo4.jpg" alt="Momento especial 4" onerror="this.src='https://via.placeholder.com/300x300/ff6347/white?text=Foto+4'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('assets/img/photo5.jpg')">
+                    <img src="assets/img/photo5.jpg" alt="Momento especial 5" onerror="this.src='https://via.placeholder.com/300x300/ff69b4/white?text=Foto+5'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('assets/img/photo6.jpg')">
+                    <img src="assets/img/photo6.jpg" alt="Momento especial 6" onerror="this.src='https://via.placeholder.com/300x300/ff1493/white?text=Foto+6'">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="interactive-heart" class="interactive-heart-section">
+        <div id="heart" class="interactive-heart" onclick="showMessage()">
+                <i class="fas fa-heart"></i>
+            </div>
+            <p class="instruction">Haz clic en el corazón </p>
+    </section>
+
+    <!-- Modal para galería -->
+    <div id="photoModal" class="modal" onclick="closeModal()">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="Foto ampliada">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Con todo mi amor, para ti ❤️</p>
+            <div class="social-hearts">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Scripts/main.js"></script>
 </body>
 </html>
